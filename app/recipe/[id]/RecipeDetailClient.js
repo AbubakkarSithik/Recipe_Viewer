@@ -19,11 +19,13 @@ export default function RecipeDetailClient({ recipe }) {
 
       if (response.ok) {
         setMessage("Added to Favorites!");
+      } else if (response.status === 409) {
+        setMessage("Recipe already exists in Favorites.");
       } else {
-        const errorData = await response.json();
-        setMessage(errorData.message || "Failed to add to favorites.");
+        setMessage("Failed to add to Favorites. Please try again.");
       }
     } catch (error) {
+      console.error("Error adding to favorites:", error);
       setMessage("An error occurred. Please try again.");
     }
   };
