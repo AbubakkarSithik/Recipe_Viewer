@@ -1,36 +1,99 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Recipe Viewer with Favorites
 
-## Getting Started
+This project is a simple **Recipe Viewer** web application built with **Next.js 13+**. The app allows users to browse recipes, view detailed information, save favorite recipes, and manage them.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Features
+
+### 1. View Recipes
+- Displays a list of recipes fetched from the [TheMealDB API].
+- Shows recipe names, images.
+
+### 2. Recipe Details
+- Displays detailed information about a recipe:
+  - Name
+  - Ingredients
+  - Instructions
+  - Dish image
+
+### 3. Manage Favorites
+- Mark recipes as favorites from the recipe details page.
+- Store favorites in a MongoDB database.
+- View and manage (remove) favorites in a dedicated "Favorites" tab.
+
+### 4. Responsive Design
+- Fully responsive UI, compatible with mobile, tablet, and desktop devices.
+
+---
+
+## Tech Stack
+
+### Frontend
+- **Next.js** (App Directory for server and client components)
+- **React** (for interactivity)
+- **Tailwind CSS** (for styling)
+
+### Backend
+- **Next.js API Routes** for managing favorites.
+- **MongoDB Atlas** for storing favorite recipes.
+
+---
+
+## Project Structure
+
+app/
+├── api/
+│   └── favorites/
+│       └── route.js        # API routes for managing favorites
+├── recipe/
+│   ├── [id]/
+│   │   ├── page.js         # Server Component for recipe details
+│   │   └── RecipeDetailClient.js # Client Component for interactivity
+├── favorites/
+│   ├── page.js             # Server Component for favorites
+│   └── FavoritesClient.js  # Client Component for interactivity
+└── layout.js               # Global layout and navigation
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## API Endpoints
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 1. **GET /api/favorites**
+- Fetches all favorite recipes from the database.
 
-## Learn More
+### 2. **POST /api/favorites**
+- Adds a new favorite recipe to the database.
+- **Request Body:**
+json
+  {
+    "recipeId": "52772",
+    "recipeName": "Chicken Handi",
+    "imageUrl": "https://www.themealdb.com/images/media/meals/wyxwsp1486979827.jpg"
+  }
+  ```
 
-To learn more about Next.js, take a look at the following resources:
+### 3. **DELETE /api/favorites?id=<favorite_id>**
+- Deletes a favorite recipe from the database.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deployment
 
-## Deploy on Vercel
+1. **Host on Vercel**:
+   - Push the project to GitHub.
+   - Link the repository to [Vercel](https://vercel.com/).
+   - Set up environment variables in the Vercel dashboard.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. **MongoDB Atlas**:
+   - MongoDB Atlas cluster is accessible from the deployed environment.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Future Enhancements
+- Add user authentication for personalized favorite management.
+- Implement search and filtering options for recipes.
+- Include random recipe suggestions on the homepage.
+
+## License
+This project is licensed under the MIT License. See the `LICENSE` file for more details.
