@@ -52,12 +52,14 @@ export async function POST(req) {
     await connectDB()
     const body = await req.json();
     const { recipeId, recipeName, imageUrl } = body;
-
+    
     const existingFavorite = await Favorite.findOne({ recipeId });
     if (existingFavorite) {
-      return NextResponse.json({ message: "Recipe already in favorites" }, { status: 409 });
+      return NextResponse.json(
+        { message: "Recipe already exists in favorites." },
+        { status: 409 }
+      );
     }
-
     const newFavorite = new Favorite({ recipeId, recipeName, imageUrl });
     await newFavorite.save();
 
@@ -67,6 +69,7 @@ export async function POST(req) {
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }
+
 
 export async function GET() {
   try {
