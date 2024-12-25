@@ -1,12 +1,16 @@
 import FavoritesClient from "./FavoritesClient";
 
 async function fetchFavorites() {
-  const response = await fetch("http://localhost:3000/api/favorites", { cache: "no-store" });
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  const response = await fetch(`${baseUrl}/api/favorites`, { cache: "no-store" });
+
   if (!response.ok) {
     throw new Error("Failed to fetch favorites");
   }
+
   return await response.json();
 }
+
 
 export default async function Favorites() {
   const favorites = await fetchFavorites();

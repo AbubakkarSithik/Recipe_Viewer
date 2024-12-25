@@ -33,7 +33,7 @@ export default function RecipeDetailClient({ recipe }) {
   return (
     <div className="container mx-auto p-4">
       <div className="flex flex-col-reverse justify-center items-center gap-4 md:flex-row">
-      <h1 className="text-8xl font-bold">{recipe.strMeal}</h1>
+      <h1 className="text-5xl font-bold md:text-8xl">{recipe.strMeal}</h1>
       
       <img
         src={recipe.strMealThumb}
